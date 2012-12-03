@@ -1,0 +1,33 @@
+server:
+  allow-flight: true
+  connection-throttle: -1
+  exact-login: false
+  ip: 0.0.0.0
+  max-players: 60
+  motd: Join now for Polymer action!
+  online-mode: true
+  operators:
+  - md_5
+  - Notch
+  - jeb_
+  port: 25565
+  server-id: Polymer0
+  server-name: Just another Polymer server
+  spawn-radius: 10
+  view-distance: 10
+  warning-state: default
+spawn-limits:
+  ambient: 15
+  animals: 15
+  monsters: 70
+  water-animals: 5
+ticks-per:
+  animal-spawns: 400
+  monster-spawns: 1
+world:
+  allow-end: true
+  allow-nether: true
+  gamemode: creative
+  generate-tructures: true
+  hardcore: false
+  type: FLAT
