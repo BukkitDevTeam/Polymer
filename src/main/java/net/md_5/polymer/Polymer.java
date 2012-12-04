@@ -9,6 +9,9 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Logger;
 import lombok.Getter;
 import net.md_5.polymer.networking.PacketDecoder;
@@ -34,7 +37,9 @@ public class Polymer {
     private int elapsedTicks;
     @Getter
     private KeyPair keyPair;
+    private final List<String> pendingCommands = new ArrayList<>();
     /*========================================================================*/
+    @Getter
     private volatile boolean running;
 
     public static void main(String[] args) throws Exception {
@@ -84,10 +89,22 @@ public class Polymer {
     }
 
     private void tick() {
-        // Do stuff
+        synchronized (pendingCommands) {
+            for (String command : pendingCommands) {
+                Polymer.getLogger().info("ECHO1: " + command);
+                System.out.println("ECHO2: " + command);
+            }
+            pendingCommands.clear();
+        }
     }
 
     public int getOnlinePlayers() {
         return 0;
+    }
+
+    public void dispatchConsoleCommand(String command) {
+        synchronized (pendingCommands) {
+            pendingCommands.add(command);
+        }
     }
 }
